@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "aRrArxGGEX0=",
+  "success": true,
+  "projectFilePath": "D:\\signalR-2\\back-end\\signalR\\signalR\\signalR.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\binance.net\\12.8.1\\binance.net.12.8.1.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\cryptoexchange.net\\10.7.1\\cryptoexchange.net.10.7.1.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\libsodium\\1.0.20.1\\libsodium.1.0.20.1.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.3\\microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\nsec.cryptography\\25.4.0\\nsec.cryptography.25.4.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\restsharp\\113.1.0\\restsharp.113.1.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\skender.stock.indicators\\2.7.1\\skender.stock.indicators.2.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}
