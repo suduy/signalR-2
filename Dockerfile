@@ -1,30 +1,30 @@
-# 1. Use the ASP.NET runtime as the base image for the final stage
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+# 1. Sử dụng ASP.NET 10.0 runtime cho image cuối
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+# Lưu ý: Từ .NET 8+, port mặc định là 8080 và 8081 (https) thay vì 80 và 443
+EXPOSE 8080
+EXPOSE 8081
 
-# 2. Use the .NET SDK image for building the application
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+# 2. Sử dụng .NET 10.0 SDK để build app
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-# LƯU Ý SỬA: Copy đúng cấu trúc thư mục để restore
+# Copy project file và restore
 COPY ["back-end/signalR/signalR/signalR.csproj", "back-end/signalR/signalR/"]
 RUN dotnet restore "back-end/signalR/signalR/signalR.csproj"
 
-# Copy the rest of the application code
+# Copy toàn bộ mã nguồn còn lại
 COPY . .
 
-# Build the application
+# Build project
 WORKDIR /src/back-end/signalR/signalR
 RUN dotnet build "signalR.csproj" -c Release -o /app/build
 
-# 3. Publish the application
+# 3. Publish project
 FROM build AS publish
-# LƯU Ý SỬA: Bỏ dòng WORKDIR /src/back-end hoặc để nguyên thư mục hiện tại từ stage build
 RUN dotnet publish "signalR.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-# 4. Create the final image
+# 4. Tạo image cuối cùng
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
