@@ -1,5 +1,4 @@
-﻿using BinanceRSIAPI.Models;
-using BinanceRSIAPI.Utils;
+﻿using BinanceRSIAPI.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BinanceRSIAPI.Controllers
@@ -23,5 +22,11 @@ namespace BinanceRSIAPI.Controllers
             GlobalVariables.MaximumOrders = requestDto.MaximumOrders;
             return Ok();
         }
+    }
+    public class BotControlRequestDto
+    {
+        public bool IsWorking { get; set; }
+        public int MaximumOrders { get; set; }
+        public bool IsNeedLimit { get; set; }
     }
 }
