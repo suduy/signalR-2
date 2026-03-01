@@ -107,7 +107,7 @@ namespace BinanceRSIAPI.Controllers
 
                     if (lastRsi.Rsi < 10)
                     {
-                        var resultOrder = await BinanceApi.PlaceFuturesOrderWithTpSlPriceAsync(item, "buy", 0m, 0m, 0m);
+                        var resultOrder = await BinanceApi.PlaceFuturesOrderWithTpSlPriceAsync(item, "buy");
                         LastSuccessfulOrders[item] = DateTime.UtcNow;
                         string message = $"📉 LONG signal on {item}. H4 Uptrend, M30 RSI oversold. ";
                         var botToken = "8111665564:AAEEe3_pDSrbBt6Fnx1l_kMdf1dhC6oRL10";
@@ -124,7 +124,7 @@ namespace BinanceRSIAPI.Controllers
                     }
                     else if (lastRsi.Rsi > 90)
                     {
-                        var resultOrder = await BinanceApi.PlaceFuturesOrderWithTpSlPriceAsync(item, "sell", 0m, 0m, 0m);
+                        var resultOrder = await BinanceApi.PlaceFuturesOrderWithTpSlPriceAsync(item, "sell");
                         LastSuccessfulOrders[item] = DateTime.UtcNow;
                         string message = $"📈 SHORT signal on {item}. H4 Downtrend, M30 RSI overbought";
                         // Gửi tín hiệu và đặt lệnh
