@@ -86,9 +86,9 @@ namespace BinanceRSIAPI.Controllers
 
                 try
                 {
-                    await Task.Delay(1200);
+                    await Task.Delay(1400);
 
-                    var rawM15 = GetKlines(item, "15m", 200);
+                    var rawM15 = GetKlines(item, "1h", 200);
                     var candlesM15 = ParseKlines(rawM15);
                     List<Quote> m15Quotes = candlesM15.Select(k => new Quote
                     {
@@ -105,7 +105,7 @@ namespace BinanceRSIAPI.Controllers
                     var lastRsi = rsi15.Last();
 
 
-                    if (lastRsi.Rsi < 10)
+                    if (lastRsi.Rsi < 17)
                     {
                         var resultOrder = await BinanceApi.PlaceFuturesOrderWithTpSlPriceAsync(item, "buy");
                         LastSuccessfulOrders[item] = DateTime.UtcNow;
@@ -122,7 +122,7 @@ namespace BinanceRSIAPI.Controllers
                         }
                         openPositionsCount++;
                     }
-                    else if (lastRsi.Rsi > 90)
+                    else if (lastRsi.Rsi > 83)
                     {
                         var resultOrder = await BinanceApi.PlaceFuturesOrderWithTpSlPriceAsync(item, "sell");
                         LastSuccessfulOrders[item] = DateTime.UtcNow;
