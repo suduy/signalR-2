@@ -146,20 +146,21 @@ namespace BinanceRSIAPI.Utils
             }
 
             Console.WriteLine($"Market {direction.ToUpper()} order placed for {symbol} | Quantity: {quantity} | Entry: {currentPrice}");
-
+          
             // Step 5: Đặt lệnh Take Profit
-            var tpMarketOrderResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync(
+            var tpOrderResult = await binanceClient.UsdFuturesApi.Trading.PlaceOrderAsync(
                 symbol: symbol,
                 side: oppositeSide,
-                type: FuturesOrderType.TakeProfitMarket,
-                stopPrice: tpPrice,
-                closePosition: true, // Bắt buộc để true
-                quantity: null       // Ép số lượng về null để sàn hiểu đây là lệnh đóng toàn bộ
+                type: FuturesOrderType.Limit,
+                price: tpPrice, // Chú ý: Dùng 'price' thay vì 'stopPrice' cho lệnh Limit
+                quantity: quantity,
+                reduceOnly: true, // Đảm bảo chỉ đóng vị thế (chốt lời), không mở ngược lệnh
+                timeInForce: TimeInForce.GoodTillCanceled // Bắt buộc phải có cho lệnh Limit
             );
 
-            if (!tpMarketOrderResult.Success)
+            if (!tpOrderResult.Success)
             {
-                Console.WriteLine($"Failed to place TP order: {tpMarketOrderResult.Error}");
+                Console.WriteLine($"Failed to place TP order: {tpOrderResult.Error}");
             }
             else
             {
@@ -173,7 +174,7 @@ namespace BinanceRSIAPI.Utils
                 type: FuturesOrderType.StopMarket,
                 stopPrice: slPrice,
                 closePosition: true, // Bắt buộc để true
-                quantity: null       // Ép số lượng về null
+                quantity: quantity       // Ép số lượng về null
             );
 
             if (!slOrderResult.Success)
