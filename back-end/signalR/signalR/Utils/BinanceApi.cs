@@ -153,8 +153,8 @@ namespace BinanceRSIAPI.Utils
                 side: oppositeSide,
                 type: FuturesOrderType.TakeProfitMarket,
                 stopPrice: tpPrice,
-                quantity: quantity,
-                reduceOnly: true
+                closePosition: true, // Bắt buộc để true
+                quantity: null       // Ép số lượng về null để sàn hiểu đây là lệnh đóng toàn bộ
             );
 
             if (!tpMarketOrderResult.Success)
@@ -172,8 +172,8 @@ namespace BinanceRSIAPI.Utils
                 side: oppositeSide,
                 type: FuturesOrderType.StopMarket,
                 stopPrice: slPrice,
-                quantity: quantity,
-                reduceOnly: true
+                closePosition: true, // Bắt buộc để true
+                quantity: null       // Ép số lượng về null
             );
 
             if (!slOrderResult.Success)
